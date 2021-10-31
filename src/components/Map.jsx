@@ -1,28 +1,28 @@
 import React from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import config from '../config';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
-const Maps = () => {
+const Maps = ({data}) => {
 
-  const mapStyles = {
+  const MapStyle = {
     height: "50vh",
     width: "100%"
   }
 
-  const defaultCenter = {
-    lat: 19.4267261, lng: -99.1718796
-  }
   
   return (
-    <LoadScript googleMapsApiKey={config.googleMapsApi}>
-      <GoogleMap
-        mapContainerStyle={mapStyles}
-        zoom={9}
-        center={defaultCenter}
-      >
-        <Marker position={defaultCenter} />
-      </GoogleMap>
-    </LoadScript>
+    <div className="Map-contianer">
+    <MapContainer center={[data.latitude, data.longitude]} zoom={13} scrollWheelZoom={false} style={MapStyle}>
+      <TileLayer
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Marker position={[data.latitude, data.longitude]}>
+        <Popup>
+          A pretty CSS3 popup. <br /> Easily customizable.
+        </Popup>
+      </Marker>
+    </MapContainer>
+    </div>
   );
 };
 
