@@ -3,12 +3,12 @@ on: [push]
 jobs:
   build:
     name: Build
+    runs-on: ubuntu-latest
     run: npm run build
     env:
       CLIENT_ID_GM: ${{ secrets.CLIENT_ID_GM }}
    	  CLIENT_ID_PP: ${{ secrets.CLIENT_ID_PP }}
    	  CLIENT_ID_MP: ${{ secrets.CLIENT_ID_MP }}
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
